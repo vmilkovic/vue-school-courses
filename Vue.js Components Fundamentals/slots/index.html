@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue.js Slots Fundamentals</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>Vue.js Slots Fundamentals</h1>
+
+    <todo-item>
+      Buy Bananas
+
+      <template #description>
+        <p>
+          Bananas are good for your health.
+        </p>
+      </template>
+
+      <template #button-text>
+        Make it rain
+      </template>
+
+    </todo-item>
+
+    <todo-item>
+      Eat Bananas
+
+      <template #description>
+        <p>
+          Bananas are good.
+        </p>
+      </template>
+
+    </todo-item>
+
+    <page-layout>
+      <template #header>
+        <h1>Here might be a page title</h1>
+      </template>
+
+      <p>A paragraph for the main content.</p>
+      <p>And another one.</p>
+
+      <template #footer>
+        <p>Here's some contact info</p>
+      </template>
+    </page-layout>
+  </div>
+
+  <script type="text/x-template" id="todo-item-template">
+    <div>
+      <input type="checkbox" v-model="completed">
+      <span :class="{done: completed}">
+        <slot></slot>
+      </span>
+      <slot name="description"></slot>
+      <button>
+        <slot name="button-text">Highlight</slot>
+      </button>
+    </div>
+  </script>
+
+  <script type="text/x-template" id="page-layout-template">
+    <div class="container">
+      <header>
+        <slot name="header"></slot>
+      </header>
+      <main>
+        <slot></slot>
+      </main>
+      <footer>
+        <slot name="footer"></slot>
+      </footer>
+    </div>
+  </script>
+
+  <script src="https://unpkg.com/vue"></script>
+  <script src="app.js"></script>
+  <style>
+    .done {
+      color: green;
+      text-decoration: line-through;
+    }
+    
+    .container {
+      max-width: 1920;
+      padding: 10px;
+    }
+
+    header {
+      width: 100%;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    footer {
+      width: 100%;
+      margin-top: 50px;
+      text-align: center;
+    }
+
+  </style>
+</body>
+
+</html>
